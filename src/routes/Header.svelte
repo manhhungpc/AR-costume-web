@@ -17,7 +17,7 @@
 			<a href="/login">Login</a>
 		</li>
 		<li class:active={$page.url.pathname.startsWith('/admin')}>
-			<a href="/admin">Admin</a>
+			<a href="/admin/costume">Admin</a>
 		</li>
 		<li class:active={$page.url.pathname === '/costume'}>
 			<a href="/costume">Costume</a>
