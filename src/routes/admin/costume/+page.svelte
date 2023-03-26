@@ -2,6 +2,7 @@
 <script>
 	// @ts-nocheck
 	import { stored } from 'base/util/stored.js';
+	import { convertToBase64 } from 'base/util/base64.js';
 
 	let name, description, qr_image, err;
 	let token,
@@ -22,22 +23,14 @@
 		return costumes;
 	}
 
-	function uploadQrImage(e) {
-		const imageData = e.target?.files?.[0];
-		const imageSize = e.target?.files[0]?.size;
-		if (!imageData) return;
-		if (imageSize > 51200) {
-			err = 'File quá lớn';
-			return;
-		}
-
-		err = '';
-		let reader = new FileReader();
-		reader.readAsDataURL(imageData);
-		reader.onloadend = function () {
-			qr_image = reader.result;
-			console.log(qr_image);
-		};
+	function uploadQrLocal(e) {
+		convertToBase64(e, (response) => {
+			qr_image = response;
+		});
+		console.log(qr_image);
+		// if (qr_image.err) {
+		// 	console.log(err);
+		// }
 	}
 
 	async function createNewCostume() {
@@ -67,7 +60,7 @@
 	<input placeholder="description" bind:value={description} />
 	<div>
 		<label for="qr_image">QR image: </label>
-		<input id="qr_image" type="file" accept="image/*" on:change={uploadQrImage} />
+		<input id="qr_image" type="file" accept="image/*" on:change={uploadQrLocal} />
 	</div>
 	{#if qr_image}
 		<img src={qr_image} alt="QR" width="300px" />
