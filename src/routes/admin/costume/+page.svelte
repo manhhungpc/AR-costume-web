@@ -72,6 +72,7 @@
 		<p>Creating ...</p>
 	{/if}
 	<button on:click={createNewCostume}>Create new costume</button>
+	<a href="https://studio.armedia.it/login">Vào chỉnh sửa hoặc tạo model</a>
 </div>
 <h3>List of costume, click to view or edit</h3>
 {#await loadData}

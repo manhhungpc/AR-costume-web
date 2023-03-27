@@ -4,7 +4,6 @@
 	import { page } from '$app/stores';
 	import { stored } from 'base/util/stored.js';
 	import { convertToBase64 } from 'base/util/base64.js';
-	import { redirect } from '@sveltejs/kit';
 	import { goto } from '$app/navigation';
 
 	let name, description, qr_image;
