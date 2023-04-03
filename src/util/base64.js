@@ -1,12 +1,13 @@
 //@ts-ignore
 export function convertToBase64(e, callback) {
 	let base64 = '',
-		err;
+		err = {};
 	const imageData = e.target?.files?.[0];
 	const imageSize = e.target?.files[0]?.size;
 	if (!imageData) return;
 	if (imageSize > 51200) {
 		err = { err: 'File quá lớn' };
+		callback(err);
 		return;
 	}
 

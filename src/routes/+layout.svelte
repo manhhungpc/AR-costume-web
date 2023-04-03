@@ -9,7 +9,7 @@
 	</main>
 
 	<footer>
-		<p>Traditional Costume AR</p>
+		<p>Trang web AR về trang phục truyền thống</p>
 	</footer>
 </div>
 
@@ -25,7 +25,6 @@
 		flex-direction: column;
 		padding: 1rem;
 		width: 100%;
-		max-width: 64rem;
 		margin: 0 auto;
 		box-sizing: border-box;
 		border: 1px solid red;

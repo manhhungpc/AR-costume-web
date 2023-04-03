@@ -34,9 +34,6 @@
 			qr_image = response;
 		});
 		console.log(qr_image);
-		// if (qr_image.err) {
-		// 	console.log(err);
-		// }
 	}
 
 	async function updateCostume(id) {
@@ -80,19 +77,54 @@
 		<!-- {console.log(costume)} -->
 		<p>Trang phục không tồn tại</p>
 	{:else}
-		<h1>Costume: {costume.name}</h1>
-		<input placeholder="name" bind:value={name} />
-		<input placeholder="description" bind:value={description} />
-		<div>
-			<label for="qr_image">QR image: </label>
-			<input id="qr_image" type="file" accept="image/*" on:change={uploadQrLocal} />
-		</div>
-		{#if qr_image}
-			<img src={qr_image} alt="QR" width="300px" />
-		{/if}
-		<div>
-			<button on:click={updateCostume($page.params.id)}>Update costume</button>
-			<button on:click={deleteCostume($page.params.id)}>Delete costume</button>
+		<h1 class="text-2xl">Chỉnh sửa trang phục {name}</h1>
+		<hr />
+		<div class="wrapper-form">
+			<div class="wrap-input">
+				<label for="name">Tên trang phục: </label>
+				<input class="text-input" placeholder="name" bind:value={name} id="name" />
+			</div>
+			<div class="wrap-input mb-4">
+				<label for="desc">Mô tả trang phục: </label>
+				<input class="text-input" placeholder="description" bind:value={description} id="desc" />
+			</div>
+			<div class="mb-3">
+				<label for="qr_image">Ảnh mã QR của trang phục: </label>
+				<input id="qr_image" type="file" accept="image/*" on:change={uploadQrLocal} />
+			</div>
+			{#if qr_image}
+				<img src={qr_image} alt="QR" width="300px" />
+			{/if}
+			<div>
+				<button on:click={updateCostume($page.params.id)}>Update costume</button>
+				<button on:click={deleteCostume($page.params.id)}>Delete costume</button>
+			</div>
 		</div>
 	{/if}
 {/await}
+
+<style>
+	.text-input {
+		@apply my-1 rounded;
+		border: 1px solid #444654;
+		width: 70%;
+		height: 35px;
+	}
+	.wrapper-form {
+		display: flex;
+		flex-direction: column;
+		padding: 1rem;
+		width: 100%;
+		margin: 0 auto;
+	}
+	button {
+		@apply bg-lime-400 p-2 w-max my-4;
+		border-radius: 8px;
+	}
+	.wrap-input {
+		width: 40%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+</style>
