@@ -1,12 +1,18 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { stored } from 'base/util/stored.js';
-	import { decode } from 'base/util/token.js';
+	import { onMount } from 'svelte';
 
 	/**
 	 * @type {string}
 	 */
 	let token;
 	stored.subscribe((val) => (token = val));
+	onMount(() => {
+		if (!token) {
+			goto('/login');
+		}
+	});
 </script>
 
 {#if token}

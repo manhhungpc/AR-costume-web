@@ -21,16 +21,25 @@
 	}
 </script>
 
-{#await getCostumeData($page.params.id)}
-	<p>Loading ...</p>
-{:then costume}
-	<h1>Costume: {costume.name}</h1>
-	<p>Trang phục: {name}</p>
-	<p>Mô tả: {description}</p>
-	<div>
-		<label for="qr_image">QR image: </label>
-	</div>
-	{#if qr_image}
-		<img src={qr_image} alt="QR" width="300px" />
-	{/if}
-{/await}
+<div class="wrapper">
+	{#await getCostumeData($page.params.id)}
+		<p>Loading ...</p>
+	{:then costume}
+		<h1>Costume: {costume.name}</h1>
+		<p>Trang phục: {name}</p>
+		<p>Mô tả: {description}</p>
+		<div>
+			<label for="qr_image">QR image: </label>
+		</div>
+		{#if qr_image}
+			<img src={qr_image} alt="QR" width="300px" />
+		{/if}
+	{/await}
+</div>
+
+<style>
+	.wrapper {
+		position: absolute;
+		left: 2rem;
+	}
+</style>

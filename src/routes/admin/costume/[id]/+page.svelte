@@ -70,40 +70,46 @@
 	}
 </script>
 
-{#await getCostumeData($page.params.id)}
-	<p>Loading ...</p>
-{:then costume}
-	{#if err}
-		<!-- {console.log(costume)} -->
-		<p>Trang phục không tồn tại</p>
-	{:else}
-		<h1 class="text-2xl">Chỉnh sửa trang phục {name}</h1>
-		<hr />
-		<div class="wrapper-form">
-			<div class="wrap-input">
-				<label for="name">Tên trang phục: </label>
-				<input class="text-input" placeholder="name" bind:value={name} id="name" />
+<div class="wrapper">
+	{#await getCostumeData($page.params.id)}
+		<p>Loading ...</p>
+	{:then costume}
+		{#if err}
+			<!-- {console.log(costume)} -->
+			<p>Trang phục không tồn tại</p>
+		{:else}
+			<h1 class="text-2xl">Chỉnh sửa trang phục {name}</h1>
+			<hr />
+			<div class="wrapper-form">
+				<div class="wrap-input">
+					<label for="name">Tên trang phục: </label>
+					<input class="text-input" placeholder="name" bind:value={name} id="name" />
+				</div>
+				<div class="wrap-input mb-4">
+					<label for="desc">Mô tả trang phục: </label>
+					<input class="text-input" placeholder="description" bind:value={description} id="desc" />
+				</div>
+				<div class="mb-3">
+					<label for="qr_image">Ảnh mã QR của trang phục: </label>
+					<input id="qr_image" type="file" accept="image/*" on:change={uploadQrLocal} />
+				</div>
+				{#if qr_image}
+					<img src={qr_image} alt="QR" width="300px" />
+				{/if}
+				<div>
+					<button on:click={updateCostume($page.params.id)}>Update costume</button>
+					<button on:click={deleteCostume($page.params.id)}>Delete costume</button>
+				</div>
 			</div>
-			<div class="wrap-input mb-4">
-				<label for="desc">Mô tả trang phục: </label>
-				<input class="text-input" placeholder="description" bind:value={description} id="desc" />
-			</div>
-			<div class="mb-3">
-				<label for="qr_image">Ảnh mã QR của trang phục: </label>
-				<input id="qr_image" type="file" accept="image/*" on:change={uploadQrLocal} />
-			</div>
-			{#if qr_image}
-				<img src={qr_image} alt="QR" width="300px" />
-			{/if}
-			<div>
-				<button on:click={updateCostume($page.params.id)}>Update costume</button>
-				<button on:click={deleteCostume($page.params.id)}>Delete costume</button>
-			</div>
-		</div>
-	{/if}
-{/await}
+		{/if}
+	{/await}
+</div>
 
 <style>
+	.wrapper {
+		position: absolute;
+		left: 2rem;
+	}
 	.text-input {
 		@apply my-1 rounded;
 		border: 1px solid #444654;
@@ -118,11 +124,11 @@
 		margin: 0 auto;
 	}
 	button {
-		@apply bg-lime-400 p-2 w-max my-4;
+		@apply bg-lime-400 p-2 w-max my-4 mx-2;
 		border-radius: 8px;
 	}
 	.wrap-input {
-		width: 40%;
+		width: 100%;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
