@@ -74,7 +74,7 @@
 			<img src={qr_image} alt="QR" width="300px" />
 		{/if}
 		{#if loading}
-			<p>Creating ...</p>
+			<p>Đang tạo ...</p>
 		{/if}
 		<div class="my-3">
 			<i class="fa-solid fa-arrow-up-right-from-square" />
@@ -84,14 +84,14 @@
 		{#if err}
 			<p class="text-red-600">Lỗi: {err}</p>
 		{/if}
-		<button on:click={createNewCostume}>Create new costume</button>
+		<button on:click={createNewCostume}>Thêm trang phục mới</button>
 	</div>
 	<hr />
 	<h3 class="text-2xl mt-3">
 		Danh sách trang phục hiển thị, ấn vào để chỉnh sửa hoặc xem chi tiết
 	</h3>
 	{#await loadData}
-		<p>Loading ...</p>
+		<p>Đang tải danh sách trang phục ...</p>
 	{:then costumes}
 		<ul>
 			{#each costumes as costume}

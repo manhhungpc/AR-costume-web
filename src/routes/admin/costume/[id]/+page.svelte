@@ -97,8 +97,8 @@
 					<img src={qr_image} alt="QR" width="300px" />
 				{/if}
 				<div>
-					<button on:click={updateCostume($page.params.id)}>Update costume</button>
-					<button on:click={deleteCostume($page.params.id)}>Delete costume</button>
+					<button on:click={updateCostume($page.params.id)}>Cập nhật trang phục</button>
+					<button on:click={deleteCostume($page.params.id)}>Xóa trang phục này</button>
 				</div>
 			</div>
 		{/if}
