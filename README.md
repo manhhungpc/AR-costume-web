@@ -9,6 +9,8 @@ Create a `.env` file and refer to the `.env.example` file for an example.
 Start a development server:
 
 ```bash
+npm i
+
 npm run dev
 
 # or start the server and open the app in a new browser tab
