@@ -2,7 +2,7 @@ import { json } from '@sveltejs/kit';
 import { verify } from '$lib/server/token.js';
 import Costume from 'base/models/Costume';
 import { JWT_SECRET } from '$env/static/private';
-import { v2 as cloudinary } from 'cloudinary';
+import { upload } from 'base/util/upload';
 
 /**
  * @type {import('./$types').RequestHandler}
@@ -34,19 +34,12 @@ export async function POST({ request }) {
 	// console.log(req, req.qr_image);
 	const imgName = encodeURIComponent(req.name);
 
-	const uploadImg = await cloudinary.uploader.upload(req.qr_image, { public_id: imgName });
-	console.log('secure_url', uploadImg.secure_url);
-
-	const url = cloudinary.url(imgName, {
-		width: 300,
-		height: 300,
-		Crop: 'fill'
-	});
+	const uploadImg = await upload(req.qr_image, imgName);
 	const data = {
 		name: req.name,
 		description: req.description || 'Không có mô tả',
 		qr: uploadImg.secure_url,
-		qr_gen_url: url,
+		qr_gen_url: uploadImg.url,
 		url_3d: ''
 	};
 	const newCostume = await Costume.create(data);

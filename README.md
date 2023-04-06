@@ -4,7 +4,7 @@ Basic function for an AR traditional costume website, mainly to display informat
 
 ## Developing
 
-Add a `.env` file as `.env.example`
+Create a `.env` file and refer to the `.env.example` file for an example.
 
 Start a development server:
 
