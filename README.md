@@ -17,7 +17,7 @@ npm run dev
 npm run dev -- --open
 ```
 
-Made with [SvelteKit](https://kit.svelte.dev/)
+Made with [SvelteKit](https://kit.svelte.dev/), Tailwind and MongoDB
 
 ---
 
