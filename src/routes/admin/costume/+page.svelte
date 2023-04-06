@@ -59,49 +59,58 @@
 	}
 </script>
 
-<h1 class="text-4xl">Trang dành cho admin</h1>
-<hr />
-<h3 class="text-2xl mt-3">Thêm trang phục mới</h3>
-<div id="new-costume-form">
-	<input class="text-input" placeholder="Tên trang phục" bind:value={name} required />
-	<input class="text-input" placeholder="Mô tả về trang phục" bind:value={description} required />
-	<div>
-		<label for="qr_image">Hình ảnh mã QR: </label>
-		<input id="qr_image" type="file" accept="image/*" on:change={uploadQrLocal} required />
+<div class="wrapper">
+	<h1 class="text-4xl">Trang dành cho admin</h1>
+	<hr />
+	<h3 class="text-2xl mt-3">Thêm trang phục mới</h3>
+	<div id="new-costume-form">
+		<input class="text-input" placeholder="Tên trang phục" bind:value={name} required />
+		<input class="text-input" placeholder="Mô tả về trang phục" bind:value={description} required />
+		<div>
+			<label for="qr_image">Hình ảnh mã QR: </label>
+			<input id="qr_image" type="file" accept="image/*" on:change={uploadQrLocal} required />
+		</div>
+		{#if qr_image}
+			<img src={qr_image} alt="QR" width="300px" />
+		{/if}
+		{#if loading}
+			<p>Creating ...</p>
+		{/if}
+		<div class="my-3">
+			<i class="fa-solid fa-arrow-up-right-from-square" />
+			<a href="https://studio.armedia.it/login" class="costume-link">Vào chỉnh sửa hoặc tạo model</a
+			>
+		</div>
+		{#if err}
+			<p class="text-red-600">Lỗi: {err}</p>
+		{/if}
+		<button on:click={createNewCostume}>Create new costume</button>
 	</div>
-	{#if qr_image}
-		<img src={qr_image} alt="QR" width="300px" />
-	{/if}
-	{#if loading}
-		<p>Creating ...</p>
-	{/if}
-	<div class="my-3">
-		<i class="fa-solid fa-arrow-up-right-from-square" />
-		<a href="https://studio.armedia.it/login" class="costume-link">Vào chỉnh sửa hoặc tạo model</a>
-	</div>
-	{#if err}
-		<p class="text-red-600">Lỗi: {err}</p>
-	{/if}
-	<button on:click={createNewCostume}>Create new costume</button>
+	<hr />
+	<h3 class="text-2xl mt-3">
+		Danh sách trang phục hiển thị, ấn vào để chỉnh sửa hoặc xem chi tiết
+	</h3>
+	{#await loadData}
+		<p>Loading ...</p>
+	{:then costumes}
+		<ul>
+			{#each costumes as costume}
+				<li class="my-3">
+					<i class="fa-solid fa-arrow-right-to-bracket" />
+					<a href="/admin/costume/{costume._id}" class="costume-link">Trang phục {costume.name}</a>
+				</li>
+			{/each}
+		</ul>
+	{:catch error}
+		<p>{error.message}</p>
+	{/await}
 </div>
-<hr />
-<h3 class="text-2xl mt-3">Danh sách trang phục hiển thị, ấn vào để chỉnh sửa hoặc xem chi tiết</h3>
-{#await loadData}
-	<p>Loading ...</p>
-{:then costumes}
-	<ul>
-		{#each costumes as costume}
-			<li class="my-3">
-				<i class="fa-solid fa-arrow-right-to-bracket" />
-				<a href="/admin/costume/{costume._id}" class="costume-link">Trang phục {costume.name}</a>
-			</li>
-		{/each}
-	</ul>
-{:catch error}
-	<p>{error.message}</p>
-{/await}
 
 <style>
+	.wrapper {
+		position: absolute;
+		left: 2rem;
+	}
 	#new-costume-form {
 		display: flex;
 		flex-direction: column;
@@ -112,7 +121,7 @@
 	.text-input {
 		@apply my-1 rounded;
 		border: 1px solid #444654;
-		width: 30%;
+		width: 50%;
 		height: 35px;
 	}
 	button {

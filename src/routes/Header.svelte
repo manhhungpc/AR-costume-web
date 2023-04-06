@@ -1,5 +1,6 @@
 <script>
 	// @ts-nocheck
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { stored } from 'base/util/stored.js';
 	import { decode } from 'base/util/token';
@@ -8,6 +9,12 @@
 	stored.subscribe((val) => (token = val));
 	if (token) {
 		user = decode(token);
+	}
+
+	function logout() {
+		stored.set(null);
+		localStorage.removeItem('token');
+		goto('/');
 	}
 </script>
 
@@ -23,7 +30,7 @@
 			<a href="/costume">Trang phục</a>
 		</li>
 		<li class:active={$page.url.pathname === '/about'} class="navigate-link">
-			<a href="/about">Về trang web</a>
+			<a href="/about">Về chúng tôi</a>
 		</li>
 	</ul>
 	{#if !token}
@@ -34,7 +41,7 @@
 				<p class="my-0">Chao xìn, {user.username}</p>
 				<small>Signed in as {user.role}</small>
 			</div>
-			<button class="h-10 w-20 bg-white text-black rounded-md">Logout</button>
+			<button class="h-10 w-20 bg-white text-black rounded-md" on:click={logout}>Logout</button>
 		</div>
 	{/if}
 </nav>
