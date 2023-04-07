@@ -35,13 +35,25 @@ export async function POST({ request }) {
 	const imgName = encodeURIComponent(req.name);
 
 	const uploadImg = await upload(req.qr_image, imgName);
+	const costumesImg = await multiUpload(req.costumes_img, imgName);
+	console.log(costumesImg)
 	const data = {
 		name: req.name,
 		description: req.description || 'Không có mô tả',
 		qr: uploadImg.secure_url,
 		qr_gen_url: uploadImg.url,
-		url_3d: ''
+		costumes_img: costumesImg
 	};
 	const newCostume = await Costume.create(data);
 	return json({ status: 200, data: newCostume });
+}
+
+const multiUpload  = async (/** @type {Array<String>} */ costumesImg, /** @type {String} */ imgName) =>{
+	let nums = 0, uploadedImg = []
+	for(let image of costumesImg){
+		const imgUrl = await upload(image, `${encodeURIComponent(imgName)}_num${nums}`)
+		uploadedImg.push(imgUrl.secure_url)
+		nums++;
+	}
+	return uploadedImg
 }

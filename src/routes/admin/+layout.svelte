@@ -25,6 +25,9 @@
 
 <style>
 	main {
+		display: flex;
+		justify-content: flex-start;
+		width: 98%;
 		min-height: 75vh;
 	}
 </style>

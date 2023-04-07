@@ -3,8 +3,13 @@
 	// @ts-nocheck
 	import { stored } from 'base/util/stored.js';
 	import { convertToBase64 } from 'base/util/base64.js';
+	import { onMount } from 'svelte';
 
-	let name, description, qr_image, err;
+	let name,
+		description,
+		qr_image,
+		costumes_img = [],
+		err;
 	let token,
 		loadData,
 		loading = false;
@@ -23,6 +28,30 @@
 		return costumes;
 	}
 
+	async function createNewCostume() {
+		if (!name || !description || !qr_image || err) {
+			err = 'Có thông tin bị bỏ trống!';
+			return;
+		}
+		loading = true;
+		const res = await fetch('/api/admin/costume', {
+			method: 'POST',
+			body: JSON.stringify({
+				name,
+				description,
+				qr_image,
+				costumes_img
+			}),
+			headers: {
+				'content-type': 'application/json',
+				authorization: 'Bearer ' + token
+			}
+		});
+
+		loading = false;
+		loadData = getAllCostume();
+	}
+
 	function uploadQrLocal(e) {
 		convertToBase64(e, (response) => {
 			if (response.err) {
@@ -34,29 +63,23 @@
 		});
 	}
 
-	async function createNewCostume() {
-		loading = true;
-		if (!name || !description || !qr_image || err) {
-			err = 'Có thông tin bị bỏ trống!';
-			return;
-		}
-		const res = await fetch('/api/admin/costume', {
-			method: 'POST',
-			body: JSON.stringify({
-				name,
-				description,
-				qr_image
-			}),
-			headers: {
-				'content-type': 'application/json',
-				authorization: 'Bearer ' + token
+	function uploadCostumeImg(e) {
+		convertToBase64(e, (response) => {
+			if (response.err) {
+				err = response.err;
+				return;
 			}
+			err = null;
+			costumes_img = [...costumes_img, response];
 		});
-
-		// console.log(await res.json());
-		loading = false;
-		loadData = getAllCostume();
 	}
+
+	function removeCostumeImage(index) {
+		costumes_img.splice(index, 1);
+		costumes_img = costumes_img;
+	}
+
+	$: console.log(costumes_img);
 </script>
 
 <div class="wrapper">
@@ -66,13 +89,36 @@
 	<div id="new-costume-form">
 		<input class="text-input" placeholder="Tên trang phục" bind:value={name} required />
 		<input class="text-input" placeholder="Mô tả về trang phục" bind:value={description} required />
-		<div>
-			<label for="qr_image">Hình ảnh mã QR: </label>
-			<input id="qr_image" type="file" accept="image/*" on:change={uploadQrLocal} required />
+		<div class="upload_btn-box">
+			<label class="upload_btn">
+				<p>Hình ảnh mã QR &nbsp; <i class="fa-solid fa-file-arrow-up text-xl" /></p>
+				<input type="file" on:change={uploadQrLocal} accept="image/*" class="costume_input" />
+			</label>
 		</div>
 		{#if qr_image}
 			<img src={qr_image} alt="QR" width="300px" />
 		{/if}
+		<div class="upload_btn-box">
+			<label class="upload_btn">
+				<p>
+					Tải ảnh trang phục lên (có thể nhiều ảnh) &nbsp; <i
+						class="fa-solid fa-file-arrow-up text-xl"
+					/>
+				</p>
+				<input type="file" on:change={uploadCostumeImg} accept="image/*" class="costume_input" />
+			</label>
+		</div>
+		<div class="costume_display">
+			{#each costumes_img as base64Img, i}
+				<div class="flex flex-row">
+					<button class="upload-close" type="button" on:click={() => removeCostumeImage(i)}>
+						<i class="fa-solid fa-xmark" />
+					</button>
+					<img src={base64Img} alt="Costume" class="image_uploaded" width="300px" />
+				</div>
+			{/each}
+		</div>
+
 		{#if loading}
 			<p>Đang tạo ...</p>
 		{/if}
@@ -108,8 +154,9 @@
 
 <style>
 	.wrapper {
-		position: absolute;
 		left: 2rem;
+		height: 100%;
+		margin-bottom: 20px;
 	}
 	#new-costume-form {
 		display: flex;
@@ -139,6 +186,66 @@
 		@apply py-2;
 		box-shadow: inset 300px 0 0 0 rgb(163, 230, 53);
 		color: #000;
-		border-radius: 8px;
+		border-radius: 20px;
+	}
+	.costume_input {
+		opacity: 0;
+		overflow: hidden;
+		height: 0.1px;
+		position: absolute;
+	}
+	.costume_display {
+		display: flex;
+		align-items: center;
+	}
+	.upload_btn {
+		display: inline-block;
+		font-weight: 600;
+		color: #fff;
+		text-align: center;
+		min-width: 116px;
+		padding: 5px;
+		transition: all 0.3s ease;
+		cursor: pointer;
+		border: 2px solid;
+		background-color: #4045ba;
+		border-color: #4045ba;
+		border-radius: 10px;
+		line-height: 26px;
+		font-size: 14px;
+	}
+	.upload_btn:hover {
+		background-color: unset;
+		color: #4045ba;
+		transition: all 0.3s ease;
+	}
+	.upload_btn-box {
+		margin: 10px 0;
+	}
+	.upload-close {
+		padding: 0;
+		height: 25px;
+		width: 25px;
+		border-radius: 50%;
+		background-color: rgb(163, 230, 53);
+		position: relative;
+		left: 30px;
+		bottom: 10px;
+		z-index: 99;
+		cursor: pointer;
+	}
+	.upload-close:hover {
+		background-color: rgb(123, 178, 34);
+	}
+
+	.upload-close:hover i {
+		color: #fff;
+	}
+
+	.image_uploaded {
+		padding: 10px;
+	}
+	.image_uploaded:hover {
+		@apply border-red-500 border-2;
 	}
 </style>

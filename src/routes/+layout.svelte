@@ -14,11 +14,6 @@
 </div>
 
 <style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
 	main {
 		flex: 1;
 		display: flex;
@@ -26,9 +21,10 @@
 		align-items: center;
 		padding: 1rem;
 		width: 100%;
+		min-height: 100vh;
 		margin: 0 auto;
-		box-sizing: border-box;
 		border: 1px solid red;
+		box-sizing: border-box;
 	}
 	footer {
 		display: flex;

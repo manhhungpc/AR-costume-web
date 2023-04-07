@@ -48,7 +48,6 @@ export async function PUT({ request, params }) {
 		description: req.description || 'Không có mô tả',
 		qr: uploadImg?.secure_url,
 		qr_gen_url: uploadImg?.url,
-		url_3d: ''
 	};
 	const updatedCostume = await Costume.findByIdAndUpdate(params.id, data).lean();
 	if (!updatedCostume) {

@@ -3,7 +3,9 @@ import { model, Schema } from 'mongoose';
 const costumeSchema = new Schema({
 	name: String,
 	description: String,
-	url_3d: String,
+	costumes_img: [{
+		type: String
+	}],
 	qr: String,
 	qr_gen_url: String
 });
