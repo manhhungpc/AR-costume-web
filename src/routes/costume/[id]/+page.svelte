@@ -39,7 +39,7 @@
 
 <style>
 	.wrapper {
-		position: absolute;
-		left: 2rem;
+		position: relative;
+		left: 1rem;
 	}
 </style>

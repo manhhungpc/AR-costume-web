@@ -33,6 +33,7 @@ export async function POST({ request }) {
 	}
 	// console.log(req, req.qr_image);
 	const imgName = encodeURIComponent(req.name);
+	console.log(imgName)
 
 	const uploadImg = await upload(req.qr_image, imgName);
 	const costumesImg = await multiUpload(req.costumes_img, imgName);
@@ -49,11 +50,10 @@ export async function POST({ request }) {
 }
 
 const multiUpload  = async (/** @type {Array<String>} */ costumesImg, /** @type {String} */ imgName) =>{
-	let nums = 0, uploadedImg = []
+	let uploadedImg = []
 	for(let image of costumesImg){
-		const imgUrl = await upload(image, `${encodeURIComponent(imgName)}_num${nums}`)
+		const imgUrl = await upload(image, `${encodeURIComponent(imgName)}_num${crypto.randomUUID()}`)
 		uploadedImg.push(imgUrl.secure_url)
-		nums++;
 	}
 	return uploadedImg
 }

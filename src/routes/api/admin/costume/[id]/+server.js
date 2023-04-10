@@ -36,20 +36,30 @@ export async function PUT({ request, params }) {
 		return json({ status: 400, err: 'Thiếu thông tin' });
 	}
 
-	let uploadImg;
+	let uploadQrImg = req.qr_image;
 	if (req.qr_image.toString().includes('https://res.cloudinary.com') == false) {
-		const imgName = encodeURIComponent(req.name);
+		const imgName = encodeURIComponent(req.name) + "_QR";
 
-		uploadImg = await upload(req.qr_image, imgName);
+		uploadQrImg = (await upload(req.qr_image, imgName)).secure_url;
+	}
+
+	let uploadCostumes = [];
+	for(let costume of req.costumes_img){
+		if (costume.toString().includes('https://res.cloudinary.com') == false) {
+			const costumeName = encodeURIComponent(req.name) + "_" + crypto.randomUUID();
+			costume = (await upload(costume, costumeName)).secure_url;
+		}
+		uploadCostumes.push(costume);
 	}
 
 	const data = {
 		name: req.name,
 		description: req.description || 'Không có mô tả',
-		qr: uploadImg?.secure_url,
-		qr_gen_url: uploadImg?.url,
+		qr: uploadQrImg,
+		costumes_img: uploadCostumes
 	};
-	const updatedCostume = await Costume.findByIdAndUpdate(params.id, data).lean();
+	console.log(data)
+	const updatedCostume = await Costume.findByIdAndUpdate(params.id, data, {new: true}).lean();
 	if (!updatedCostume) {
 		return json({ status: 400, err: 'Trang phục không tồn tại' });
 	}

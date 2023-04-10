@@ -5,8 +5,7 @@ import { v2 as cloudinary } from 'cloudinary';
  * @param {string} name
  */
 export async function upload(imageData, name) {
-	const uploadImg = await cloudinary.uploader.upload(imageData, { public_id: 'qr_' + name });
-	// console.log('secure_url', uploadImg.secure_url);
+	const uploadImg = await cloudinary.uploader.upload(imageData, { public_id: name });
 
 	const url = cloudinary.url(name, {
 		width: 300,
