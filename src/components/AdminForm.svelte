@@ -73,7 +73,7 @@
 
 <style>
 	.text-input {
-		@apply my-1 rounded;
+		@apply my-1 rounded px-2 text-black;
 		border: 1px solid #444654;
 		width: 70%;
 		height: 35px;
@@ -103,24 +103,26 @@
 		width: 100%;
 	}
 	.upload_btn {
+		@apply bg-lime-400 border-lime-400;
 		display: inline-block;
 		font-weight: 600;
-		color: #fff;
+		color: #000;
 		text-align: center;
 		min-width: 116px;
 		padding: 5px;
 		transition: all 0.3s ease;
 		cursor: pointer;
 		border: 2px solid;
-		background-color: #4045ba;
-		border-color: #4045ba;
+		/* background-color: #4045ba;
+		border-color: #4045ba; */
 		border-radius: 10px;
 		line-height: 26px;
 		font-size: 14px;
 	}
 	.upload_btn:hover {
+		@apply text-lime-400;
 		background-color: unset;
-		color: #4045ba;
+		/* color: #4045ba; */
 		transition: all 0.3s ease;
 	}
 	.upload_btn-box {

@@ -15,7 +15,7 @@
 		<img
 			src="https://imageio.forbes.com/specials-images/dam/imageserve/1126094461/960x0.jpg?format=jpg&width=960"
 			alt="AR Traditional Costume"
-			class="carousel-img"
+			class="main-img"
 		/>
 	</div>
 	<a href="/costume" class="cta-button">
@@ -23,17 +23,30 @@
 		<i class="fa-solid fa-arrow-right-to-bracket" />
 	</a>
 </div>
-<section id="featured-costume" class="featured-costume">
+<h1 class="name">Một số trang phục nổi bật</h1>
+<section class="featured-costume">
 	<img src={costumeImgSrc} alt="Tên trang phục" class="costume-img" />
 	<div class="featured-costume-details">
 		<div class="featured-costume-name">Tên trang phục</div>
-		<div class="featured-costume-country">Mô tả trang phục</div>
+		<div class="featured-costume-label">Mô tả trang phục</div>
 		<div class="featured-costume-description">
 			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est illum, sed saepe excepturi ab
 			architecto temporibus tenetur provident asperiores at distinctio, unde dignissimos maiores
 			numquam, similique dolor officiis quidem aut!
 		</div>
 	</div>
+</section>
+<section class="featured-costume">
+	<div class="featured-costume-details">
+		<div class="featured-costume-name">Tên trang phục</div>
+		<div class="featured-costume-label">Mô tả trang phục</div>
+		<div class="featured-costume-description">
+			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est illum, sed saepe excepturi ab
+			architecto temporibus tenetur provident asperiores at distinctio, unde dignissimos maiores
+			numquam, similique dolor officiis quidem aut!
+		</div>
+	</div>
+	<img src={costumeImgSrc} alt="Tên trang phục" class="costume-img" />
 </section>
 <div class="subscribe-form">
 	<input class="subscribe-input" placeholder="Nhập lời nhắn cho đội dev để subscribe" />
@@ -44,13 +57,11 @@
 
 <style>
 	.container {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
 		align-items: center;
 		height: 90dvh;
 		padding: 2rem;
 		text-align: center;
+		margin-bottom: 5rem;
 	}
 
 	.name {
@@ -62,11 +73,14 @@
 	.description {
 		font-size: 1.2rem;
 		margin-bottom: 2rem;
-		color: #777;
+		color: #cacaca;
 	}
 
 	.image-container {
 		margin-bottom: 2rem;
+		height: 60dvh;
+		display: flex;
+		justify-content: center;
 	}
 
 	.cta-button {
@@ -112,7 +126,7 @@
 		margin-bottom: 1rem;
 	}
 
-	.featured-costume-country {
+	.featured-costume-label {
 		font-size: 1rem;
 		margin-bottom: 1rem;
 		color: #777;
@@ -120,7 +134,7 @@
 
 	.featured-costume-description {
 		font-size: 1rem;
-		color: #444;
+		color: #cacaca;
 	}
 
 	.subscribe-form {

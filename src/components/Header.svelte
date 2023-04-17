@@ -18,7 +18,7 @@
 	}
 </script>
 
-<nav class="bg-gray-800 border-x-2 text-white flex flex-row justify-between px-3 py-5">
+<nav class="border-x-2 text-white flex flex-row justify-between px-3 py-5">
 	<ul class="flex flex-row space-x-5 ml-6">
 		<li class:active={$page.url.pathname === '/'} class="navigate-link">
 			<a href="/">Trang chủ</a>
@@ -53,6 +53,7 @@
 
 	nav {
 		border: none;
+		background-color: #12181b;
 	}
 
 	.navigate-link {

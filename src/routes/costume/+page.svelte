@@ -32,7 +32,7 @@
 	}
 	.costume-link {
 		box-shadow: inset 0 0 0 0 rgb(163, 230, 53);
-		color: #000;
+		color: #fff;
 		margin: 0 -0.25rem;
 		padding: 0 0.25rem;
 		transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;

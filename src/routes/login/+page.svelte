@@ -1,9 +1,8 @@
 <script>
 	// @ts-nocheck
-	import { goto } from '$app/navigation';
 	import { stored } from 'base/util/stored.js';
-	import { decode } from 'base/util/token.js';
-	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+
 	let username = '',
 		password = '';
 	let dataReponse;
@@ -24,12 +23,13 @@
 		dataReponse = await res.json();
 		if (dataReponse.status == 200) {
 			stored.set(dataReponse.token);
+			window.location.href = '/admin/costume';
 		}
 	}
 </script>
 
 {#if token}
-	{goto('/admin/costume')}
+	Đã đăng nhập! Vui lòng refresh lại trang.
 {:else}
 	<div class="wrapper">
 		<h1 class="header">Đăng nhập cho admin</h1>
@@ -57,6 +57,7 @@
 	.text-input {
 		@apply my-1 rounded p-1;
 		border: 1px solid #444654;
+		color: #000;
 		width: 100%;
 		height: 35px;
 	}
