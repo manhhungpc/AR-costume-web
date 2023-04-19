@@ -2,8 +2,8 @@
 <script>
 	// @ts-nocheck
 	import { stored } from 'base/util/stored.js';
-	import { convertToBase64 } from 'base/util/base64.js';
 	import AdminForm from 'base/components/AdminForm.svelte';
+	import ListCostume from 'base/components/ListCostume.svelte';
 
 	let name,
 		description,
@@ -11,22 +11,9 @@
 		costumes_img = [],
 		err;
 	let token,
-		loadData,
+		loadNewData,
 		loading = false;
 	stored.subscribe((val) => (token = val));
-
-	loadData = getAllCostume();
-
-	async function getAllCostume() {
-		const res = await fetch('/api/admin/costume', {
-			headers: {
-				'content-type': 'application/json',
-				authorization: 'Bearer ' + token
-			}
-		});
-		const { costumes } = await res.json();
-		return costumes;
-	}
 
 	async function createNewCostume() {
 		if (!name || !description || !qr_image || err) {
@@ -49,7 +36,7 @@
 		});
 
 		loading = false;
-		loadData = getAllCostume();
+		loadNewData = true;
 	}
 </script>
 
@@ -57,39 +44,6 @@
 	<h1 class="text-4xl">Trang dành cho admin</h1>
 	<hr />
 	<h3 class="text-2xl mt-3">Thêm trang phục mới</h3>
-	<!-- <div id="new-costume-form">
-		<input class="text-input" placeholder="Tên trang phục" bind:value={name} required />
-		<input class="text-input" placeholder="Mô tả về trang phục" bind:value={description} required />
-		<div class="upload_btn-box">
-			<label class="upload_btn">
-				<p>Hình ảnh mã QR &nbsp; <i class="fa-solid fa-file-arrow-up text-xl" /></p>
-				<input type="file" on:change={uploadQrLocal} accept="image/*" class="costume_input" />
-			</label>
-		</div>
-		{#if qr_image}
-			<img src={qr_image} alt="QR" width="300px" />
-		{/if}
-		<div class="upload_btn-box">
-			<label class="upload_btn">
-				<p>
-					Tải ảnh trang phục lên (có thể nhiều ảnh) &nbsp; <i
-						class="fa-solid fa-file-arrow-up text-xl"
-					/>
-				</p>
-				<input type="file" on:change={uploadCostumeImg} accept="image/*" class="costume_input" />
-			</label>
-		</div>
-		<div class="costume_display">
-			{#each costumes_img as base64Img, i}
-				<div class="flex flex-row">
-					<button class="upload-close" type="button" on:click={() => removeCostumeImage(i)}>
-						<i class="fa-solid fa-xmark" />
-					</button>
-					<img src={base64Img} alt="Costume" class="image_uploaded" width="300px" />
-				</div>
-			{/each}
-		</div>
-	</div> -->
 	<div class="wrap-form">
 		<AdminForm bind:name bind:description bind:qr_image bind:costumes_img />
 		{#if loading}
@@ -109,20 +63,9 @@
 	<h3 class="text-2xl mt-3">
 		Danh sách trang phục hiển thị, ấn vào để chỉnh sửa hoặc xem chi tiết
 	</h3>
-	{#await loadData}
-		<p>Đang tải danh sách trang phục ...</p>
-	{:then costumes}
-		<ul>
-			{#each costumes as costume}
-				<li class="my-3">
-					<i class="fa-solid fa-arrow-right-to-bracket" />
-					<a href="/admin/costume/{costume._id}" class="costume-link">Trang phục {costume.name}</a>
-				</li>
-			{/each}
-		</ul>
-	{:catch error}
-		<p>{error.message}</p>
-	{/await}
+	{#key loadNewData}
+		<ListCostume isAdmin={true} />
+	{/key}
 </div>
 
 <style>
