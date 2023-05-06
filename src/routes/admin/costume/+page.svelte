@@ -8,6 +8,7 @@
 	let name,
 		description,
 		qr_image,
+		marker_image,
 		costumes_img = [],
 		err;
 	let token,
@@ -26,6 +27,7 @@
 			body: JSON.stringify({
 				name,
 				description,
+				marker_image,
 				qr_image,
 				costumes_img
 			}),
@@ -45,7 +47,7 @@
 	<hr />
 	<h3 class="text-2xl mt-3">Thêm trang phục mới</h3>
 	<div class="wrap-form">
-		<AdminForm bind:name bind:description bind:qr_image bind:costumes_img />
+		<AdminForm bind:name bind:description bind:qr_image bind:marker_image bind:costumes_img />
 		{#if loading}
 			<p>Đang tạo ...</p>
 		{/if}

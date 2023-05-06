@@ -1,6 +1,6 @@
 <script>
 	// @ts-nocheck
-	export let name, description, qr_image, costumes_img;
+	export let name, description, qr_image, costumes_img, marker_image;
 	let err;
 	import { convertToBase64 } from 'base/util/base64.js';
 
@@ -11,6 +11,12 @@
 	function uploadQrLocal(e) {
 		convertToBase64(e, (response) => {
 			qr_image = response;
+		});
+	}
+
+	function uploadMarker(e) {
+		convertToBase64(e, (response) => {
+			marker_image = response;
 		});
 	}
 
@@ -40,7 +46,7 @@
 		<label for="desc">Mô tả trang phục: </label>
 		<input class="text-input" placeholder="description" bind:value={description} id="desc" />
 	</div>
-	<div class="upload_btn-box">
+	<div class="upload_btn-box" name="QR-image">
 		<label class="upload_btn">
 			<p>Hình ảnh mã QR &nbsp; <i class="fa-solid fa-file-arrow-up text-xl" /></p>
 			<input type="file" on:change={uploadQrLocal} accept="image/*" class="costume_input" />
@@ -49,7 +55,16 @@
 	{#if qr_image}
 		<img src={qr_image} alt="QR" width="300px" />
 	{/if}
-	<div class="upload_btn-box">
+	<div class="upload_btn-box" name="marker-image">
+		<label class="upload_btn">
+			<p>Hình ảnh marker cho AR &nbsp; <i class="fa-solid fa-file-arrow-up text-xl" /></p>
+			<input type="file" on:change={uploadMarker} accept="image/*" class="costume_input" />
+		</label>
+	</div>
+	{#if marker_image}
+		<img src={marker_image} alt="Marker" width="300px" />
+	{/if}
+	<div class="upload_btn-box" name="costumes-images">
 		<label class="upload_btn">
 			<p>
 				Tải ảnh trang phục lên (có thể nhiều ảnh) &nbsp; <i

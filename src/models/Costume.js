@@ -7,7 +7,8 @@ const costumeSchema = new Schema({
 		type: String
 	}],
 	qr: String,
-	qr_gen_url: String
+	qr_gen_url: String,
+	marker_img: String
 });
 
 const Costume = model('costume', costumeSchema);

@@ -33,27 +33,33 @@ export async function POST({ request }) {
 	}
 	// console.log(req, req.qr_image);
 	const imgName = encodeURIComponent(req.name);
-	console.log(imgName)
+	const markerName = encodeURIComponent(`marker_${req.name}`);
 
 	const uploadImg = await upload(req.qr_image, imgName);
+	const uploadMarker = await upload(req.marker_image, markerName);
 	const costumesImg = await multiUpload(req.costumes_img, imgName);
-	console.log(costumesImg)
+
 	const data = {
 		name: req.name,
 		description: req.description || 'Không có mô tả',
 		qr: uploadImg.secure_url,
 		qr_gen_url: uploadImg.url,
-		costumes_img: costumesImg
+		costumes_img: costumesImg,
+		marker_img: uploadMarker.secure_url
 	};
+	console.log(data);
 	const newCostume = await Costume.create(data);
 	return json({ status: 200, data: newCostume });
 }
 
-const multiUpload  = async (/** @type {Array<String>} */ costumesImg, /** @type {String} */ imgName) =>{
-	let uploadedImg = []
-	for(let image of costumesImg){
-		const imgUrl = await upload(image, `${encodeURIComponent(imgName)}_num${crypto.randomUUID()}`)
-		uploadedImg.push(imgUrl.secure_url)
+const multiUpload = async (
+	/** @type {Array<String>} */ costumesImg,
+	/** @type {String} */ imgName
+) => {
+	let uploadedImg = [];
+	for (let image of costumesImg) {
+		const imgUrl = await upload(image, `${encodeURIComponent(imgName)}_num${crypto.randomUUID()}`);
+		uploadedImg.push(imgUrl.secure_url);
 	}
-	return uploadedImg
-}
+	return uploadedImg;
+};

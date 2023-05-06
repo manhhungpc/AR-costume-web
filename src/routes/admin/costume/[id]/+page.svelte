@@ -9,7 +9,8 @@
 	let name,
 		description,
 		costumes_img = [],
-		qr_image;
+		qr_image,
+		marker_image;
 	let token, err;
 	tokenStore.subscribe((val) => (token = val));
 
@@ -21,7 +22,7 @@
 			}
 		});
 		const data = await res.json();
-		// console.log(costume);
+		console.log(data);
 		if (data.err) {
 			err = data.err;
 			return;
@@ -30,6 +31,7 @@
 		description = data.costume.description;
 		qr_image = data.costume.qr;
 		costumes_img = data.costume.costumes_img;
+		marker_image = data.costume.marker_img;
 		return data.costume;
 	}
 
@@ -79,7 +81,7 @@
 		{:else}
 			<h1 class="text-2xl">Chỉnh sửa trang phục {name}</h1>
 			<hr />
-			<AdminForm bind:name bind:description bind:qr_image bind:costumes_img />
+			<AdminForm bind:name bind:description bind:qr_image bind:marker_image bind:costumes_img />
 			<div class="p-1">
 				<button on:click={updateCostume($page.params.id)}>Cập nhật trang phục</button>
 				<button on:click={deleteCostume($page.params.id)}>Xóa trang phục này</button>
