@@ -1,3 +1,3 @@
-import { persisted } from 'svelte-local-storage-store';
+import { writable } from 'svelte/store';
 
-export const stored = persisted('token', '');
+export const tokenStore = writable('');

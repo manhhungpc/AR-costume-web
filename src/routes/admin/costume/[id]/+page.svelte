@@ -2,7 +2,7 @@
 <script>
 	// @ts-nocheck
 	import { page } from '$app/stores';
-	import { stored } from 'base/util/stored.js';
+	import { tokenStore } from 'base/util/stored.js';
 	import { goto } from '$app/navigation';
 	import AdminForm from 'base/components/AdminForm.svelte';
 
@@ -11,7 +11,7 @@
 		costumes_img = [],
 		qr_image;
 	let token, err;
-	stored.subscribe((val) => (token = val));
+	tokenStore.subscribe((val) => (token = val));
 
 	async function getCostumeData(id) {
 		const res = await fetch(`/api/admin/costume/${id}`, {

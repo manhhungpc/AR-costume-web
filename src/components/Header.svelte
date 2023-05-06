@@ -1,20 +1,26 @@
 <script>
 	// @ts-nocheck
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { stored } from 'base/util/stored.js';
+	import { tokenStore } from 'base/util/stored.js';
 	import { decode } from 'base/util/token';
+	import { onMount } from 'svelte';
 
-	let token, user;
-	stored.subscribe((val) => (token = val));
-	if (token) {
-		user = decode(token);
-	}
+	let token = '',
+		user;
+	onMount(() => {
+		tokenStore.set(localStorage.getItem('token'));
+		tokenStore.subscribe((val) => {
+			token = val;
+			if (token) {
+				user = decode(token);
+			}
+		});
+	});
 
 	function logout() {
-		stored.set(null);
+		tokenStore.set(null);
 		localStorage.removeItem('token');
-		goto('/');
+		window.location.href = '/';
 	}
 </script>
 

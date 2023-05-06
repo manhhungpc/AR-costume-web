@@ -1,13 +1,12 @@
 <script>
 	// @ts-nocheck
-	import { stored } from 'base/util/stored.js';
-	import { goto } from '$app/navigation';
+	import { tokenStore } from 'base/util/stored.js';
 
 	let username = '',
 		password = '';
 	let dataReponse;
 	let token;
-	stored.subscribe((val) => (token = val));
+	tokenStore.subscribe((val) => (token = val));
 	async function onLogin() {
 		const res = await fetch('/api/login', {
 			method: 'POST',
@@ -22,8 +21,10 @@
 
 		dataReponse = await res.json();
 		if (dataReponse.status == 200) {
-			stored.set(dataReponse.token);
-			window.location.href = '/admin/costume';
+			console.log(dataReponse);
+			tokenStore.set(dataReponse.token);
+			localStorage.setItem('token', dataReponse.token);
+			window.location.href = '/';
 		}
 	}
 </script>

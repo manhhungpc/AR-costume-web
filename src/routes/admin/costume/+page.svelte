@@ -1,7 +1,7 @@
 <!-- route: /admin/costume -->
 <script>
 	// @ts-nocheck
-	import { stored } from 'base/util/stored.js';
+	import { tokenStore } from 'base/util/stored.js';
 	import AdminForm from 'base/components/AdminForm.svelte';
 	import ListCostume from 'base/components/ListCostume.svelte';
 
@@ -13,7 +13,7 @@
 	let token,
 		loadNewData,
 		loading = false;
-	stored.subscribe((val) => (token = val));
+	tokenStore.subscribe((val) => (token = val));
 
 	async function createNewCostume() {
 		if (!name || !description || !qr_image || err) {

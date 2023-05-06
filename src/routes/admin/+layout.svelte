@@ -1,13 +1,13 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { stored } from 'base/util/stored.js';
+	import { tokenStore } from 'base/util/stored.js';
 	import { onMount } from 'svelte';
 
 	/**
 	 * @type {string}
 	 */
 	let token;
-	stored.subscribe((val) => (token = val));
+	tokenStore.subscribe((val) => (token = val));
 	onMount(() => {
 		if (!token) {
 			goto('/login');
