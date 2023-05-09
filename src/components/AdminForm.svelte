@@ -42,9 +42,17 @@
 		<label for="name">Tên trang phục: </label>
 		<input class="text-input" placeholder="name" bind:value={name} id="name" />
 	</div>
-	<div class="wrap-input mb-4">
+	<div class="wrap-textarea mb-4">
 		<label for="desc">Mô tả trang phục: </label>
-		<input class="text-input" placeholder="description" bind:value={description} id="desc" />
+		<div>
+			<textarea
+				class="text-input "
+				placeholder="description"
+				bind:value={description}
+				id="desc"
+				style="height: 150px; width: 40vw;"
+			/>
+		</div>
 	</div>
 	<div class="upload_btn-box" name="QR-image">
 		<label class="upload_btn">
@@ -105,6 +113,9 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+	}
+	.wrap-textarea {
+		width: 500px;
 	}
 	.costume_input {
 		opacity: 0;

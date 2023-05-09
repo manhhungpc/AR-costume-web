@@ -4,7 +4,7 @@ import Costume from 'base/models/Costume';
 /**
  * @type {import('./$types').RequestHandler}
  */
-export async function GET({ request, params }) {
+export async function GET({ params }) {
 	const costume = await Costume.findOne({ _id: params.id }).lean();
 
 	if (!costume) return json({ status: 400, err: 'Không tồn tại trang phục' });
