@@ -58,7 +58,7 @@ export async function PUT({ request, params }) {
 		qr: uploadQrImg,
 		costumes_img: uploadCostumes
 	};
-	console.log(data)
+	// console.log(data)
 	const updatedCostume = await Costume.findByIdAndUpdate(params.id, data, {new: true}).lean();
 	if (!updatedCostume) {
 		return json({ status: 400, err: 'Trang phục không tồn tại' });

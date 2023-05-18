@@ -12,11 +12,7 @@
 		Việt Nam
 	</div>
 	<div class="image-container">
-		<img
-			src="https://imageio.forbes.com/specials-images/dam/imageserve/1126094461/960x0.jpg?format=jpg&width=960"
-			alt="AR Traditional Costume"
-			class="main-img"
-		/>
+		<img src="/Banner.png" alt="AR Traditional Costume" class="main-img" />
 	</div>
 	<a href="/costume" class="cta-button">
 		Khám phá ngay &nbsp;
@@ -25,28 +21,36 @@
 </div>
 <h1 class="name">Một số trang phục nổi bật</h1>
 <section class="featured-costume">
-	<img src={costumeImgSrc} alt="Tên trang phục" class="costume-img" />
+	<img src="/Ao_giao_linh.jpg" alt="Tên trang phục" class="costume-img" />
 	<div class="featured-costume-details">
-		<div class="featured-costume-name">Tên trang phục</div>
-		<div class="featured-costume-label">Mô tả trang phục</div>
+		<div class="featured-costume-name">Áo giao lĩnh</div>
+		<div class="featured-costume-label">Mô tả trang phục:</div>
 		<div class="featured-costume-description">
-			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est illum, sed saepe excepturi ab
-			architecto temporibus tenetur provident asperiores at distinctio, unde dignissimos maiores
-			numquam, similique dolor officiis quidem aut!
+			Áo giao lĩnh là loại áo vạt chéo, buộc vạt bên phải vốn phổ biến ở Châu Á. Đây là loại áo cổ
+			xưa và được trọng nhất trong lễ tiết Á Đông. Cổn Miện – phục sức cao nhất của bậc đế vương,
+			chỉ được dùng trong những dịp tế trời luôn là dạng giao lĩnh vì tuân theo Chu Lễ. Ở Việt Nam
+			hình ảnh áo giao lĩnh xưa nhất được tìm thấy trên tượng A Di Đà thời Lý tại chùa Phật Tích.
+			Vào thời Lê Trung Hưng thế kỷ 17 và 18, tranh và tượng thể hiện các tầng lớp dân cư mặc giao
+			lĩnh còn lại khá nhiều
 		</div>
 	</div>
 </section>
 <section class="featured-costume">
 	<div class="featured-costume-details">
-		<div class="featured-costume-name">Tên trang phục</div>
+		<div class="featured-costume-name">Áo tứ thân</div>
 		<div class="featured-costume-label">Mô tả trang phục</div>
 		<div class="featured-costume-description">
-			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est illum, sed saepe excepturi ab
-			architecto temporibus tenetur provident asperiores at distinctio, unde dignissimos maiores
-			numquam, similique dolor officiis quidem aut!
+			Áo tứ thân (hay còn gọi là áo tứ linh) là một loại trang phục truyền thống của người Việt Nam,
+			được sử dụng từ thế kỷ 19 và đến nay vẫn còn tồn tại và được mặc trong các dịp đặc biệt.<br
+			/><br />Áo tứ thân bao gồm 4 phần chính: áo ngực, áo lửng, váy xòe và khăn đầu. Vải được dùng
+			để làm áo tứ thân thường là vải lụa, nhung, gấm hoặc vải tơ tằm với các họa tiết phong phú, đa
+			dạng.
+			<br /><br />Trước đây, áo tứ thân được mặc chủ yếu bởi phụ nữ quý tộc hoặc những người có thân
+			phận quan lại. Tuy nhiên, hiện nay, áo tứ thân đã trở thành một trang phục phổ biến trong các
+			dịp lễ hội, đám cưới hoặc các sự kiện văn hóa.
 		</div>
 	</div>
-	<img src={costumeImgSrc} alt="Tên trang phục" class="costume-img" />
+	<img src="/Ao_tu_than.jpg" alt="Tên trang phục" class="costume-img" />
 </section>
 <div class="subscribe-form">
 	<input class="subscribe-input" placeholder="Nhập lời nhắn cho đội dev để subscribe" />

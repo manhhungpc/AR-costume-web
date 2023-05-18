@@ -51,7 +51,8 @@
 			}
 		});
 
-		// console.log(await res.json());
+		console.log(await res.json());
+		goto('/admin/costume');
 	}
 
 	async function deleteCostume(id) {

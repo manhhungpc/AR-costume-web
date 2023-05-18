@@ -19,7 +19,7 @@
 				<li class="list-item">
 					<div class="list-item-content">
 						<h3 class="list-item-title">Trang phục: {costume.name}</h3>
-						<p class="list-item-description">{costume.description}</p>
+						<p class="list-item-description">{costume.description.substr(0, 65)} ...</p>
 					</div>
 				</li>
 			</a>
@@ -33,7 +33,7 @@
 	.list {
 		width: 90vw;
 		display: grid;
-		grid-template-columns: auto auto auto;
+		grid-template-columns: 1fr 1fr 1fr;
 		gap: 1rem;
 		margin: 2rem 1rem;
 		list-style: none;

@@ -47,7 +47,7 @@ export async function POST({ request }) {
 		costumes_img: costumesImg,
 		marker_img: uploadMarker.secure_url
 	};
-	console.log(data);
+	// console.log(data);
 	const newCostume = await Costume.create(data);
 	return json({ status: 200, data: newCostume });
 }

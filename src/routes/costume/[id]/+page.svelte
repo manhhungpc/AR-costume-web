@@ -42,10 +42,10 @@
 				</div>
 				<div class="tag">
 					<p class="tag-text">Thông tin trang phục:</p>
-					<span>{description}</span>
+					<span>{@html description.replaceAll('<break>', '<br/><br/>')}</span>
 				</div>
 
-				<p class="tag">Một số hình ảnh về trang phục được hiển thị bên cạnh</p>
+				<p class="tag tag-text">Một số hình ảnh về trang phục được hiển thị bên cạnh</p>
 			</div>
 			<div>
 				<div class="costume_image">
